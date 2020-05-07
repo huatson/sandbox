@@ -42,7 +42,6 @@ endif(UNIX)
 # create relevant static libraries requried for other projects
 add_library(STB_IMAGE ${CMAKE_SOURCE_DIR}/src/stb_image.cpp)
 set(LIBS ${LIBS} STB_IMAGE)
-
 add_library(GLAD ${CMAKE_SOURCE_DIR}/src/glad.cpp)
 set(LIBS ${LIBS} GLAD)
 
@@ -56,7 +55,7 @@ file(GLOB SOURCE
 add_executable(sandbox ${SOURCE})
 #target_link_libraries(sandbox OpenGL::GL)
 target_link_libraries(sandbox ${LIBS})
-set_target_properties(sandbox PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
+#set_target_properties(sandbox PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin)
 # copy shader files to build directory
 file(GLOB SHADERS
     ${CMAKE_SOURCE_DIR}/src/shaders/*.vs
