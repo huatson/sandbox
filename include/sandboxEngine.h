@@ -1,7 +1,8 @@
-#ifndef __SANDBOX_ENGINE__
-#define __SANDBOX_ENGINE__
+#ifndef __SANDBOX_ENGINE_H__
+#define __SANDBOX_ENGINE_H__
 
 // engine types
+#include "sandboxShader.h"
 #include "sandboxTypes.h"
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -9,8 +10,8 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 class SandboxEngine
 {
 public:
-    SandboxEngine() : success(0) {}
-    ~SandboxEngine() {}
+    SandboxEngine(){}
+    ~SandboxEngine(){}
 
     //  process all input: query GLFW whether relevant keys are
     //  pressed/released this frame and react accordingly
@@ -18,14 +19,14 @@ public:
     bool initialize(int mayor, int minor);
     GLFWwindow *createWindow(int width, int height, const char *title);
     bool validateGLAD(int viewport_width, int viewport_height);
-    bool createShader(FShaderData &data);
-    bool linkShaders(FLinkShaderData &data);
-    void updateEngine(GLFWwindow *window, FLinkShaderData &linkdata);
+    void generateBuffers();
+    void updateEngine(GLFWwindow *window, SandboxShader *shader);
+
 
 private:
-    GLint success;
-    GLchar infoLog[LOG_SIZE];
     // shaders
+    GLuint VAO;
+    GLuint VBO;
     const GLchar *vertexShaderSource = "#version 330 core\n"
                                        "layout (location = 0) in vec3 aPos;\n"
                                        "layout (location = 1) in vec3 aColor;\n"
@@ -54,4 +55,4 @@ private:
         1, 2, 3};
 };
 
-#endif  //__SANDBOX_ENGINE__
+#endif  //__SANDBOX_ENGINE_H__
